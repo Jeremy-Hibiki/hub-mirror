@@ -16,6 +16,14 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'hub-mirror')
     # 镜像转换任务的步骤列表
     steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
       # 1. 切换分支（默认主分支）
       - name: Check out code
         uses: actions/checkout@v2
