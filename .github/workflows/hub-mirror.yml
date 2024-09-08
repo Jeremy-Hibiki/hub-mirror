@@ -19,11 +19,13 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 512
-          swap-size-mb: 1024
+          build-mount-path: /var/lib/docker/
           remove-dotnet: 'true'
+          remove-android: 'true'
           remove-haskell: 'true'
           remove-codeql: 'true'
+      - name: Restart docker
+        run: sudo service docker restart
       # 1. 切换分支（默认主分支）
       - name: Check out code
         uses: actions/checkout@v2
